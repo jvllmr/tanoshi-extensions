@@ -1,14 +1,14 @@
 use anyhow::Result;
+use lazy_static::lazy_static;
+use networking::{build_ureq_agent, Agent};
+use std::env;
 use tanoshi_lib::extensions::PluginRegistrar;
 use tanoshi_lib::prelude::{Extension, Input, Lang, SourceInfo};
-use lazy_static::lazy_static;
-use networking::{Agent, build_ureq_agent};
-use std::env;
 
 tanoshi_lib::export_plugin!(register);
 
 fn register(registrar: &mut dyn PluginRegistrar) {
-    registrar.register_function(Box::new(Mangasee::default()));
+    registrar.register_function(Box::new(Weebcentral::default()));
 }
 
 lazy_static! {
@@ -16,15 +16,15 @@ lazy_static! {
 }
 
 const ID: i64 = 3;
-const NAME: &str = "MangaSee";
-const URL: &str = "https://mangasee123.com";
+const NAME: &str = "WeebCentral";
+const URL: &str = "https://weebcentral.com";
 
-pub struct Mangasee {
+pub struct Weebcentral {
     preferences: Vec<Input>,
     client: Agent,
 }
 
-impl Default for Mangasee {
+impl Default for Weebcentral {
     fn default() -> Self {
         Self {
             preferences: PREFERENCES.clone(),
@@ -33,11 +33,8 @@ impl Default for Mangasee {
     }
 }
 
-impl Extension for Mangasee {
-    fn set_preferences(
-        &mut self,
-        preferences: Vec<Input>,
-    ) -> Result<()> {
+impl Extension for Weebcentral {
+    fn set_preferences(&mut self, preferences: Vec<Input>) -> Result<()> {
         for input in preferences {
             for pref in self.preferences.iter_mut() {
                 if input.eq(pref) {
@@ -59,7 +56,7 @@ impl Extension for Mangasee {
             name: NAME.to_string(),
             url: URL.to_string(),
             version: env!("CARGO_PKG_VERSION"),
-            icon: "https://mangasee123.com/media/favicon.png",
+            icon: "https://weebcentral.com/static/images/144.png",
             languages: Lang::Single("en".to_string()),
             nsfw: false,
         }

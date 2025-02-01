@@ -568,17 +568,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "mangasee"
-version = "0.3.0"
-dependencies = [
- "anyhow",
- "lazy_static",
- "nepnep",
- "networking",
- "tanoshi-lib",
-]
-
-[[package]]
 name = "mangatx"
 version = "0.3.0"
 dependencies = [
@@ -1655,6 +1644,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "44d8de8415c823c8abd270ad483c6feeac771fad964890779f9a8cb24fbbc1bf"
 dependencies = [
  "webpki",
+]
+
+[[package]]
+name = "weebcentral"
+version = "0.3.0"
+dependencies = [
+ "anyhow",
+ "lazy_static",
+ "nepnep",
+ "networking",
+ "tanoshi-lib",
 ]
 
 [[package]]

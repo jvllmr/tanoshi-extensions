@@ -5,7 +5,7 @@ This repository host extenstions for tanoshi
 | ID  | Name                | Note                                       | Status  |
 |-----|---------------------|--------------------------------------------|---------|
 | 2   | Mangadex            |                                            | Active  |
-| 3   | Mangasee            |                                            | Active  |
+| 3   | Mangasee            | Mangasee is now Weebcentral, use 28        | Removed |
 | 4   | Manga4Life          |                                            | Active  |
 | 5   | Catmanga            | Site closed                                | Removed |
 | 6   | NHentai             |                                            | Broken  |
@@ -30,6 +30,7 @@ This repository host extenstions for tanoshi
 | 25  | AsuraScans          |                                            | Active  |
 | 26  | LeviatanScans       |                                            | Active  |
 | 27  | MangaTX             |                                            | Active  |
+| 28  | Weebcentral         |                                            | Active  |
 
 ## Diclaimer
 The developer of this application does not host any content and does not have affiliation with any content provider.
