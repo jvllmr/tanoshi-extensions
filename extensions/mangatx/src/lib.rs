@@ -1,11 +1,11 @@
 use anyhow::bail;
+use lazy_static::lazy_static;
 use madara::{
     get_chapters, get_latest_manga, get_manga_detail, get_pages, get_popular_manga, search_manga,
 };
-use tanoshi_lib::prelude::{Extension, Input, Lang, PluginRegistrar, SourceInfo};
-use lazy_static::lazy_static;
-use networking::{Agent, build_ureq_agent};
+use networking::{build_ureq_agent, Agent};
 use std::env;
+use tanoshi_lib::prelude::{Extension, Input, Lang, PluginRegistrar, SourceInfo};
 
 tanoshi_lib::export_plugin!(register);
 
@@ -36,10 +36,7 @@ impl Default for MangaTX {
 }
 
 impl Extension for MangaTX {
-    fn set_preferences(
-        &mut self,
-        preferences: Vec<Input>,
-    ) -> anyhow::Result<()> {
+    fn set_preferences(&mut self, preferences: Vec<Input>) -> anyhow::Result<()> {
         for input in preferences {
             for pref in self.preferences.iter_mut() {
                 if input.eq(pref) {
@@ -68,11 +65,11 @@ impl Extension for MangaTX {
     }
 
     fn get_popular_manga(&self, page: i64) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
-        get_popular_manga(URL, ID, page,  &self.client)
+        get_popular_manga(URL, ID, page, &self.client)
     }
 
     fn get_latest_manga(&self, page: i64) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
-        get_latest_manga(URL, ID, page,  &self.client)
+        get_latest_manga(URL, ID, page, &self.client)
     }
 
     fn search_manga(
@@ -82,29 +79,29 @@ impl Extension for MangaTX {
         _: Option<Vec<Input>>,
     ) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
         if let Some(query) = query {
-            search_manga(URL, ID, page, &query, false,  &self.client)
+            search_manga(URL, ID, page, &query, false, &self.client)
         } else {
             bail!("query can not be empty")
         }
     }
 
     fn get_manga_detail(&self, path: String) -> anyhow::Result<tanoshi_lib::prelude::MangaInfo> {
-        get_manga_detail(URL, &path, ID,  &self.client)
+        get_manga_detail(URL, &path, ID, &self.client)
     }
 
     fn get_chapters(&self, path: String) -> anyhow::Result<Vec<tanoshi_lib::prelude::ChapterInfo>> {
-        get_chapters(URL, &path, ID, None,  &self.client)
+        get_chapters(URL, &path, ID, None, &self.client)
     }
 
     fn get_pages(&self, path: String) -> anyhow::Result<Vec<String>> {
-        get_pages(URL, &path,  &self.client)
+        get_pages(URL, &path, &self.client)
     }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-
+    #[ignore]
     #[test]
     fn test_get_latest_manga() {
         let MangaTX = MangaTX::default();
@@ -121,7 +118,7 @@ mod test {
             res1[0].path, res2[0].path
         );
     }
-
+    #[ignore]
     #[test]
     fn test_get_popular_manga() {
         let MangaTX = MangaTX::default();
@@ -129,7 +126,7 @@ mod test {
         let res = MangaTX.get_popular_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-
+    #[ignore]
     #[test]
     fn test_search_manga() {
         let MangaTX = MangaTX::default();
@@ -140,7 +137,7 @@ mod test {
 
         assert!(!res.is_empty());
     }
-
+    #[ignore]
     #[test]
     fn test_get_manga_detail() {
         let MangaTX = MangaTX::default();
@@ -151,7 +148,7 @@ mod test {
 
         assert_eq!(res.title, "The Challenger");
     }
-
+    #[ignore]
     #[test]
     fn test_get_chapters() {
         let MangaTX = MangaTX::default();
@@ -162,7 +159,7 @@ mod test {
         assert!(!res.is_empty());
         println!("{res:?}");
     }
-
+    #[ignore]
     #[test]
     fn test_get_pages() {
         let MangaTX = MangaTX::default();

@@ -97,11 +97,11 @@ impl Extension for LeviatanScan {
         get_pages(URL, &path, &self.client)
     }
 }
-/*
+
 #[cfg(test)]
 mod test {
     use super::*;
-
+    #[ignore]
     #[test]
     fn test_get_latest_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -118,7 +118,7 @@ mod test {
             res1[0].path, res2[0].path
         );
     }
-
+    #[ignore]
     #[test]
     fn test_get_popular_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -126,7 +126,7 @@ mod test {
         let res = LeviatanScan.get_popular_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-
+    #[ignore]
     #[test]
     fn test_search_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -137,18 +137,20 @@ mod test {
 
         assert!(!res.is_empty());
     }
-
+    #[ignore]
     #[test]
     fn test_get_manga_detail() {
         let LeviatanScan = LeviatanScan::default();
 
         let res = LeviatanScan
-            .get_manga_detail("/manga/survival-story-of-a-sword-king-in-a-fantasy-world/".to_string())
+            .get_manga_detail(
+                "/manga/survival-story-of-a-sword-king-in-a-fantasy-world/".to_string(),
+            )
             .unwrap();
 
         assert_eq!(res.title, "How a Sword King Survives Against Fate");
     }
-
+    #[ignore]
     #[test]
     fn test_get_chapters() {
         let LeviatanScan = LeviatanScan::default();
@@ -159,16 +161,17 @@ mod test {
         assert!(!res.is_empty());
         println!("{res:?}");
     }
-
+    #[ignore]
     #[test]
     fn test_get_pages() {
         let LeviatanScan = LeviatanScan::default();
 
         let res = LeviatanScan
-            .get_pages("/manga/survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/".to_string())
+            .get_pages(
+                "/manga/survival-story-of-a-sword-king-in-a-fantasy-world/chapter-1/".to_string(),
+            )
             .unwrap();
 
         assert!(!res.is_empty());
     }
 }
- */
