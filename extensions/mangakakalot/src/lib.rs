@@ -1,11 +1,11 @@
 use anyhow::bail;
+use lazy_static::lazy_static;
 use mangakakalot_common::{
     get_chapters, get_manga_detail, get_pages, parse_manga_list, parse_search_manga_list,
 };
-use tanoshi_lib::prelude::{Extension, Input, Lang, PluginRegistrar, SourceInfo};
-use lazy_static::lazy_static;
-use networking::{Agent, build_ureq_agent};
+use networking::{build_ureq_agent, Agent};
 use std::env;
+use tanoshi_lib::prelude::{Extension, Input, Lang, PluginRegistrar, SourceInfo};
 
 tanoshi_lib::export_plugin!(register);
 
@@ -36,10 +36,7 @@ impl Default for Mangakakalot {
 }
 
 impl Extension for Mangakakalot {
-    fn set_preferences(
-        &mut self,
-        preferences: Vec<Input>,
-    ) -> anyhow::Result<()> {
+    fn set_preferences(&mut self, preferences: Vec<Input>) -> anyhow::Result<()> {
         for input in preferences {
             for pref in self.preferences.iter_mut() {
                 if input.eq(pref) {
@@ -68,20 +65,24 @@ impl Extension for Mangakakalot {
     }
 
     fn get_popular_manga(&self, page: i64) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
-        let body = self.client.get(&format!(
-            "{URL}/manga_list?type=topview&category=all&state=all&page={page}",
-        ))
-        .call()?
-        .into_string()?;
+        let body = self
+            .client
+            .get(&format!(
+                "{URL}/manga_list?type=topview&category=all&state=all&page={page}",
+            ))
+            .call()?
+            .into_string()?;
         parse_manga_list(ID, &body, ".list-truyen-item-wrap")
     }
 
-    fn get_latest_manga(&self, page: i64) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {        
-        let body = self.client.get(&format!(
-            "{URL}/manga_list?type=latest&category=all&state=all&page={page}",
-        ))
-        .call()?
-        .into_string()?;
+    fn get_latest_manga(&self, page: i64) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
+        let body = self
+            .client
+            .get(&format!(
+                "{URL}/manga_list?type=latest&category=all&state=all&page={page}",
+            ))
+            .call()?
+            .into_string()?;
         parse_manga_list(ID, &body, ".list-truyen-item-wrap")
     }
 
@@ -90,14 +91,16 @@ impl Extension for Mangakakalot {
         page: i64,
         query: Option<String>,
         _: Option<Vec<Input>>,
-    ) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {       
+    ) -> anyhow::Result<Vec<tanoshi_lib::prelude::MangaInfo>> {
         if let Some(query) = query {
-            let body = self.client.get(&format!(
-                "{URL}/search/story/{}?page={page}",
-                query.replace(" ", "_").to_lowercase()
-            ))
-            .call()?
-            .into_string()?;
+            let body = self
+                .client
+                .get(&format!(
+                    "{URL}/search/story/{}?page={page}",
+                    query.replace(" ", "_").to_lowercase()
+                ))
+                .call()?
+                .into_string()?;
             parse_search_manga_list(ID, &body, "div.story_item")
         } else {
             bail!("query can not be empty")
@@ -112,8 +115,10 @@ impl Extension for Mangakakalot {
         get_chapters(&path, ID, &self.client)
     }
 
-    fn get_pages(&self, path: String) -> anyhow::Result<Vec<String>> {        
-        let body = self.client.get(&format!("https://chapmanganato.com{path}"))
+    fn get_pages(&self, path: String) -> anyhow::Result<Vec<String>> {
+        let body = self
+            .client
+            .get(&format!("https://chapmanganato.com{path}"))
             .call()?
             .into_string()?;
         get_pages(&body)
@@ -170,7 +175,7 @@ mod test {
         assert_eq!(res.title, "Shokugeki no Soma");
         assert_eq!(
             res.cover_url,
-            "https://avt.mkklcdnv6temp.com/22/k/1-1583464578.jpg"
+            "https://avt.mkklcdnv6temp.com/fld/25/g/1-1732717360-nw.webp"
         );
         assert!(res.description.is_some());
         assert_ne!(res.description, Some("".to_string()));
@@ -184,6 +189,7 @@ mod test {
                 "Comedy".to_string(),
                 "Cooking".to_string(),
                 "Drama".to_string(),
+                "Ecchi".to_string(),
                 "School life".to_string(),
                 "Shounen".to_string(),
             ]
