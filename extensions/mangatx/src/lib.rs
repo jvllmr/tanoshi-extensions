@@ -101,7 +101,7 @@ impl Extension for MangaTX {
 #[cfg(test)]
 mod test {
     use super::*;
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_latest_manga() {
         let MangaTX = MangaTX::default();
@@ -118,7 +118,7 @@ mod test {
             res1[0].path, res2[0].path
         );
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_popular_manga() {
         let MangaTX = MangaTX::default();
@@ -126,7 +126,7 @@ mod test {
         let res = MangaTX.get_popular_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_search_manga() {
         let MangaTX = MangaTX::default();
@@ -137,7 +137,7 @@ mod test {
 
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_manga_detail() {
         let MangaTX = MangaTX::default();
@@ -148,7 +148,7 @@ mod test {
 
         assert_eq!(res.title, "The Challenger");
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_chapters() {
         let MangaTX = MangaTX::default();
@@ -159,7 +159,7 @@ mod test {
         assert!(!res.is_empty());
         println!("{res:?}");
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_pages() {
         let MangaTX = MangaTX::default();

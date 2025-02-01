@@ -519,7 +519,7 @@ mod test {
 
         nhentai
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_get_popular_manga() {
         let nhentai: NHentai = create_test_instance();
@@ -527,7 +527,7 @@ mod test {
         let res = nhentai.get_popular_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_get_latest_manga() {
         std::thread::sleep(std::time::Duration::from_secs(1));
@@ -537,7 +537,7 @@ mod test {
         let res = nhentai.get_latest_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_search_manga() {
         std::thread::sleep(std::time::Duration::from_secs(2));
@@ -549,7 +549,7 @@ mod test {
             .unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_search_manga_filter() {
         std::thread::sleep(std::time::Duration::from_secs(3));
@@ -575,7 +575,7 @@ mod test {
         let res = nhentai.search_manga(1, None, Some(filters)).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_get_manga_detail() {
         let nhentai: NHentai = create_test_instance();
@@ -584,7 +584,7 @@ mod test {
 
         assert_eq!(res.title, "Lady, Maid ni datsu");
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_get_chapters() {
         std::thread::sleep(std::time::Duration::from_secs(1));
@@ -594,7 +594,7 @@ mod test {
         let res = nhentai.get_chapters("/g/385965".to_string()).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Test fails with status 403, but extension works"]
     #[test]
     fn test_get_pages() {
         std::thread::sleep(std::time::Duration::from_secs(2));

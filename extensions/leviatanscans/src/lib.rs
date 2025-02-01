@@ -101,7 +101,7 @@ impl Extension for LeviatanScan {
 #[cfg(test)]
 mod test {
     use super::*;
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_latest_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -118,7 +118,7 @@ mod test {
             res1[0].path, res2[0].path
         );
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_popular_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -126,7 +126,7 @@ mod test {
         let res = LeviatanScan.get_popular_manga(1).unwrap();
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_search_manga() {
         let LeviatanScan = LeviatanScan::default();
@@ -137,7 +137,7 @@ mod test {
 
         assert!(!res.is_empty());
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_manga_detail() {
         let LeviatanScan = LeviatanScan::default();
@@ -150,7 +150,7 @@ mod test {
 
         assert_eq!(res.title, "How a Sword King Survives Against Fate");
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_chapters() {
         let LeviatanScan = LeviatanScan::default();
@@ -161,7 +161,7 @@ mod test {
         assert!(!res.is_empty());
         println!("{res:?}");
     }
-    #[ignore]
+    #[ignore = "Site down"]
     #[test]
     fn test_get_pages() {
         let LeviatanScan = LeviatanScan::default();

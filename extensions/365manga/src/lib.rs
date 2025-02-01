@@ -2,12 +2,9 @@ use std::env;
 
 use anyhow::bail;
 use lazy_static::lazy_static;
-use madara::{
-    get_chapters, get_manga_detail, get_pages,
-    parse_manga_list,
-};
+use madara::{get_chapters, get_manga_detail, get_pages, parse_manga_list};
 use networking::{build_flaresolverr_client, build_ureq_agent, Agent};
-use scraper::{Selector};
+use scraper::Selector;
 use tanoshi_lib::prelude::{Extension, Input, Lang, PluginRegistrar, SourceInfo};
 tanoshi_lib::export_plugin!(register);
 
@@ -188,7 +185,7 @@ mod test {
         assert!(!res.is_empty());
     }
 
-    #[ignore = "Probably Cloudflare issues"]
+    #[ignore = "Does not work; probably due to anti-scraping mechanisms"]
     #[test]
     fn test_search_manga() {
         let three_sixty_five_manga: ThreeSixtyFiveManga = create_test_instance();
